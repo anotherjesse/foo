@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="pongCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('pongCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game objects
+        const player = { x: 50, y: 250, width: 20, height: 100, dy: 5 };
+        const ai = { x: 730, y: 250, width: 20, height: 100, dy: 5 };
+        const ball = { x: 395, y: 295, radius: 5, dx: -3, dy: -3 };
+
+        // Game functions
+        function drawPlayer() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function drawAI() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(ai.x, ai.y, ai.width, ai.height);
+        }
+
+        function drawBall() {
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function gameLoop() {
+            // Clear canvas
+            clearCanvas();
+
+            // Draw game objects
+            drawPlayer();
+            drawAI();
+            drawBall();
+
+            // Request next animation frame for game loop
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start game loop
+        gameLoop();
+    </script>
+</body>
+</html>
